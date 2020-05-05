@@ -74,7 +74,7 @@ const PrevisaoItem = (props) => {
                 />
                 <View>
                     <View style={estilos.primeiraLinha}>
-                        <Text style={estilos.valor}>Sensação Termica: {props.feelsLike + "\u00B0"}C</Text>
+                        <Text style={estilos.valor}>Sensação Termica: {props.feelsLike + "\u00B0"}</Text>
                     </View>
                     <View style={estilos.segundaLinha}>
                         <Text>Nascer do Sol: {new Date(props.sunrise * 1000).toLocaleTimeString()}</Text>
