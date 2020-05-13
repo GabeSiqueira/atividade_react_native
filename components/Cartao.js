@@ -36,7 +36,7 @@ import { View, StyleSheet } from 'react-native';
 const Cartao = (props) => {
     return (
         <View style={{...estilos.cartao, ...props.estilos}}>
-            {props.children}
+            {props.children}    
         </View>
     );
 }

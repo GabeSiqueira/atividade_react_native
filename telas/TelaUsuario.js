@@ -34,11 +34,11 @@ const TelaUsuario = (props) => {
         <View styles={estilos.telaView}>
             <Text style={estilos.titulo}>Dados do usuario</Text>
                 <Cartao estilos={estilos.telaView}>
-                    <Text style={estilos.txtForm}>Id: {props.id}</Text>
-                    <Text style={estilos.txtForm}>Nome: {props.nome}</Text>
-                    <Text style={estilos.txtForm}>Telefone: {props.telefone}</Text>
+                    <Text style={estilos.txtForm}>ID: {props.navigation.state.params.chave}</Text>
+                    <Text style={estilos.txtForm}>Nome: {props.navigation.state.params.nome}</Text>
+                    <Text style={estilos.txtForm}>Telefone: {props.navigation.state.params.telefone}</Text>
                 </Cartao>
-                <TextInput 
+                {/* <TextInput 
                     placeholder="Nome..."
                     style={estilos.form}
                     onChangeText={capturarNome}
@@ -62,7 +62,7 @@ const TelaUsuario = (props) => {
                     style={estilos.botoes}
                     title="Voltar"
                     onPress={editarTelaInicio}
-                />
+                /> */}
         </View>
       );
 }
@@ -73,7 +73,7 @@ const estilos = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'left',
-        marginVertical: 10
+        marginVertical: 5
     },
     telaView:{
         width: '100%',

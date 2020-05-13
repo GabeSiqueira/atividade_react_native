@@ -40,10 +40,12 @@ const LembreteItem = (props) => {
                     confirmaDelete
             }
             onPress={() => {
-                    props.onSelecionaUsuarioId(props.chave);
-                    props.onSelecionaUsuarioNome(props.nome);
-                    props.onSelecionaUsuarioTelefone(props.telefone);
-                    editarTelaUsuario();
+                    // props.onSelecionaUsuarioId(props.chave);
+                    // props.onSelecionaUsuarioNome(props.nome);
+                    // props.onSelecionaUsuarioTelefone(props.telefone);
+                    // editarTelaUsuario();
+                    console.log("Propriedades dentro do onpress" + props.chave + props.nome + props.telefone)
+                    props.onSelect();
                 } 
             }
             >
@@ -61,7 +63,8 @@ const styles = StyleSheet.create({
     itemNaLista: {
         borderRadius: 8,
         marginBottom: 8,
-        color: 'green'
+        marginTop: 5,
+        color: 'green',
     }
 });
 

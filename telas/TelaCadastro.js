@@ -39,20 +39,29 @@ const TelaCadastro = (props) => {
             renderItem={
                 ({item}) => (
                 <UsuarioItem
+                    chave={item.key}
                     nome={item.vNome}
                     telefone={item.vTelefone}
-                    chave={item.key}
-                    onDelete={removerLembrete}
-                    onSelecionaUsuarioId={props.onSelecionaUsuarioId}
-                    onSelecionaUsuarioNome={props.onSelecionaUsuarioNome}
-                    onSelecionaUsuarioTelefone={props.onSelecionaUsuarioTelefone}
-                    onSelecionaEditarTelaUsuario={props.onEditarTelaUsuario}
+                    onSelect={
+                        () => {props.navigation.navigate("DetalheDoUsuario", {chave: item.key, nome: item.vNome, telefone:item.vTelefone})}
+                    }
+                    // onDelete={removerLembrete}
+                    // onSelecionaUsuarioId={props.onSelecionaUsuarioId}
+                    // onSelecionaUsuarioNome={props.onSelecionaUsuarioNome}
+                    // onSelecionaUsuarioTelefone={props.onSelecionaUsuarioTelefone}
+                    // onSelecionaEditarTelaUsuario={props.onEditarTelaUsuario}
                 />
                 )          
             }
             />
         </View>
     );
+}
+
+TelaCadastro.navigationOptions = dadosNav => {
+    return {
+        headerTitle: "Cadastro Usuario"
+    }
 }
 
 const estilos = StyleSheet.create({
