@@ -33,6 +33,9 @@ const LembreteItem = (props) => {
         props.onSelecionaEditarTelaUsuario();
     }
 
+    const[nome, setNome] = useState();
+    const[telefone,setTelefone] = useState();
+
     return (
         <Cartao>
             <TouchableOpacity 
@@ -44,13 +47,14 @@ const LembreteItem = (props) => {
                     // props.onSelecionaUsuarioNome(props.nome);
                     // props.onSelecionaUsuarioTelefone(props.telefone);
                     // editarTelaUsuario();
-                    console.log("Propriedades dentro do onpress" + props.chave + props.nome + props.telefone)
+                    //console.log("Propriedades dentro do onpress" + props.chave + props.nome + props.telefone)
+                    console.log("Propriedades dentro do onpress" + props)
                     props.onSelect();
                 } 
             }
             >
                 <View style={styles.itemNaLista}>
-                    <Text>ID: {props.chave}</Text>
+                    {/* <Text>ID: {props.id}</Text> */}
                     <Text>Nome: {props.nome}</Text>
                     <Text>Telefone: {props.telefone}</Text>
                 </View>

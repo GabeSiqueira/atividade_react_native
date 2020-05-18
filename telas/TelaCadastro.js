@@ -1,50 +1,55 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, FlatList, Keyboard} from 'react-native';
+import {View, StyleSheet, FlatList, Keyboard, Platform} from 'react-native';
 import UsuarioInput from '../components/LembreteInput';
 import UsuarioItem from '../components/LembreteItem';
+import { useDispatch } from 'react-redux';
+import * as usuariosActions from '../store/usuarios-actions'
+import {useSelector} from 'react-redux'
 
 const TelaCadastro = (props) => {
-    const [usuarios, setUsuarios] = useState([]);
-    let [contadorUsuarios, setContadorUsuarios] = useState(10);
+    // const [usuarios, setUsuarios] = useState([]);
+    // let [contadorUsuarios, setContadorUsuarios] = useState(10);
 
-    const removerLembrete = (keyASerRemovida) => {
-        setUsuarios(usuarios =>{
-          return usuarios.filter(nome => nome.key !== keyASerRemovida);
-        })
-    }
+    // const removerLembrete = (keyASerRemovida) => {
+    //     setUsuarios(usuarios =>{
+    //       return usuarios.filter(nome => nome.key !== keyASerRemovida);
+    //     })
+    // }
 
-    const adicionarNome = (nome,telefone) => {
-        setUsuarios (usuarios => {
-          console.log (usuarios);
-          //setContadorUsuarios(contadorUsuarios + 2);
+    // const adicionarNome = (nome,telefone) => {
+    //     setUsuarios (usuarios => {
+    //       console.log (usuarios);
+    //       //setContadorUsuarios(contadorUsuarios + 2);
 
-        if(contadorUsuarios % 2 == 1){
-            setContadorUsuarios(contadorUsuarios+1); 
-        }else{
-            setContadorUsuarios(contadorUsuarios+2); 
-        }
+    //     if(contadorUsuarios % 2 == 1){
+    //         setContadorUsuarios(contadorUsuarios+1); 
+    //     }else{
+    //         setContadorUsuarios(contadorUsuarios+2); 
+    //     }
 
-          return [{key: contadorUsuarios, vNome: nome, vTelefone: telefone}, ...usuarios];
-     });
-     Keyboard.dismiss();
-    }
+    //       return [{key: contadorUsuarios, vNome: nome, vTelefone: telefone}, ...usuarios];
+    //  });
+    //  Keyboard.dismiss();
+    // }
 
-    
+    const usuarios = useSelector(estado => estado.usuarios.usuarios);    
 
     return (
         <View style={estilos.tela}>
-            <UsuarioInput onAdicionarUsuario={adicionarNome}/>
+            <UsuarioInput/>
             <FlatList
             data={usuarios}
+            keyExtractor={usuario=>usuario.id}
             renderItem={
-                ({item}) => (
+                usuario => (
                 <UsuarioItem
-                    chave={item.key}
-                    nome={item.vNome}
-                    telefone={item.vTelefone}
+                    //chave={item.key}
+                    nome={usuario.item.nome}
+                    telefone={usuario.item.telefone}
                     onSelect={
-                        () => {props.navigation.navigate("DetalheDoUsuario", {chave: item.key, nome: item.vNome, telefone:item.vTelefone})}
+                        () => {props.navigation.navigate("DetalheDoUsuario", {nome: usuario.item.nome, telefone: usuario.item.telefone, imagem: usuario.item.imagemURI})}
                     }
+                    imagem={null}
                     // onDelete={removerLembrete}
                     // onSelecionaUsuarioId={props.onSelecionaUsuarioId}
                     // onSelecionaUsuarioNome={props.onSelecionaUsuarioNome}

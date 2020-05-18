@@ -1,13 +1,25 @@
 import React,{useState} from 'react';
-import { View } from 'react-native';
-import Cabecalho from './components/Cabecalho';
-import TelaCadastro from './telas/TelaCadastro';
-import TelaUsuario from './telas/TelaUsuario';
+// import { View } from 'react-native';
+// import Cabecalho from './components/Cabecalho';
+// import TelaCadastro from './telas/TelaCadastro';
+// import TelaUsuario from './telas/TelaUsuario';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux'
+import reduxThunk from 'redux-thunk';
 import UsuariosNavegacao from './navegacao/UsuariosNavegacao';
+import usuariosReducer from './store/usuarios-reducer';
+
+const rootReducer = combineReducers({
+  usuarios: usuariosReducer
+})
+
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
 
 export default function App() {
 
-  return <UsuariosNavegacao />
+  return <Provider store={store}>
+        <UsuariosNavegacao />
+        </Provider>
 
 }
 //   const[idUsuario, setIdUsuario] = useState();
