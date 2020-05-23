@@ -1,4 +1,4 @@
-import { ADD_USUARIO } from "./usuarios-actions";
+import { ADD_USUARIO, LISTA_USUARIOS } from "./usuarios-actions";
 import Usuario from "../model/Usuario";
 
 
@@ -9,8 +9,12 @@ const estadoInicial = {
 export default(estado = estadoInicial, action) => {
     switch(action.type)
     {
+        case LISTA_USUARIOS:
+            return {
+                usuarios: action.usuarios.map(u => new Usuario(u.id.toString(), u.nome, u.telefone, u.imagemURI))
+            }
         case ADD_USUARIO:
-            const u = new Usuario(new Date().toString(), action.dadosUsuario.nome, action.dadosUsuario.telefone, action.dadosUsuario.imagemURI);
+            const u = new Usuario(action.dadosUsuario.id.toString(), action.dadosUsuario.nome, action.dadosUsuario.telefone, action.dadosUsuario.imagemURI);
             return {
                 usuarios: estado.usuarios.concat(u)
             }

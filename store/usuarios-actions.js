@@ -1,7 +1,47 @@
-export const ADD_USUARIO = 'ADD_USUARIO';
+import * as FileSystem from 'expo-file-system';
+import { inserirUsuario, buscarUsuarios } from '../helpers/db';
 
-export const addUsuario = (nome, telefone, imagemURI) => {
-    return {
-        type: ADD_USUARIO, dadosUsuario: {nome: nome, telefone: telefone, imagemURI: imagemURI} 
+export const ADD_USUARIO = 'ADD_USUARIO';
+export const LISTA_USUARIOS = "LISTA_USUARIOS";
+
+export const buscarUsuario = () => {
+    return async dispatch => {
+        try{
+            const resultadoDB = await buscarUsuarios();
+            dispatch({type: LISTA_USUARIOS, usuarios: resultadoDB.rows._array})
+        }catch(err){
+            console.log(err);
+            throw err;
+        }
     }
 }
+
+export const addUsuario = (nome, telefone, imagemURI) => {
+    return async dispatch => {
+        const nomeArquivo = imagemURI.split("/").pop();
+        const novoPath = FileSystem.documentDirectory + nomeArquivo;
+        try{
+            await FileSystem.moveAsync({
+                from:imagemURI,
+                to: novoPath
+            })
+            const resultadoDB = await inserirUsuario(
+                nome,
+                telefone,
+                novoPath
+            )
+            console.log("Aqui")
+            console.log(resultadoDB);
+            dispatch({type: ADD_USUARIO, dadosUsuario: {id: resultadoDB.insertId, nome: nome, telefone: telefone, imagemURI: novoPath}})
+        }catch(err){
+            console.log(err);
+            throw err;
+        }
+    }
+}
+
+// export const addUsuario = (nome, telefone, imagemURI) => {
+//     return {
+//         type: ADD_USUARIO, dadosUsuario: {nome: nome, telefone: telefone, imagemURI: imagemURI} 
+//     }
+// }
