@@ -15,11 +15,11 @@ export const buscarUsuarios = () => {
     return promise;
 }
 
-export const inserirUsuario = (nome, telefone, imagemURI) => {
+export const inserirUsuario = (nome, telefone, imagemURI, latitude, longitude) => {
     const promise = new Promise((resolve, reject) => {
             db.transaction((tx) => {
-                tx.executeSql('INSERT INTO tb_usuario (nome, telefone, imagemURI) values (?, ?, ?);',
-                [nome, telefone, imagemURI],
+                tx.executeSql('INSERT INTO tb_usuario (nome, telefone, imagemURI, latitude, longitude) values (?, ?, ?, ?, ?);',
+                [nome, telefone, imagemURI, latitude, longitude],
                 (_, resultado) => {resolve(resultado)},
                 (_, err) => {reject(err)}
             );
@@ -31,7 +31,7 @@ export const inserirUsuario = (nome, telefone, imagemURI) => {
 export const init = () => {
     const promise = new Promise((resolve, reject) => {
             db.transaction((tx) => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS tb_usuario (id INTEGER PRIMARY KEY, nome TEXT, telefone TEXT, imagemURI TEXT);',
+                tx.executeSql('CREATE TABLE IF NOT EXISTS tb_usuario (id INTEGER PRIMARY KEY, nome TEXT, telefone TEXT, imagemURI TEXT, latitude TEXT, longitude TEXT);',
                 [],
                 () => {resolve()},
                 (_, err) => {reject(err)}

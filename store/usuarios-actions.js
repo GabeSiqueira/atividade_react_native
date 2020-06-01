@@ -16,7 +16,7 @@ export const buscarUsuario = () => {
     }
 }
 
-export const addUsuario = (nome, telefone, imagemURI) => {
+export const addUsuario = (nome, telefone, imagemURI, latitude, longitude) => {
     return async dispatch => {
         const nomeArquivo = imagemURI.split("/").pop();
         const novoPath = FileSystem.documentDirectory + nomeArquivo;
@@ -28,11 +28,13 @@ export const addUsuario = (nome, telefone, imagemURI) => {
             const resultadoDB = await inserirUsuario(
                 nome,
                 telefone,
-                novoPath
+                novoPath,
+                latitude,
+                longitude
             )
             console.log("Aqui")
             console.log(resultadoDB);
-            dispatch({type: ADD_USUARIO, dadosUsuario: {id: resultadoDB.insertId, nome: nome, telefone: telefone, imagemURI: novoPath}})
+            dispatch({type: ADD_USUARIO, dadosUsuario: {id: resultadoDB.insertId, nome: nome, telefone: telefone, imagemURI: novoPath, latitude: latitude, longitude: longitude}})
         }catch(err){
             console.log(err);
             throw err;

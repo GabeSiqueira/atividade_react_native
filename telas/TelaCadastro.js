@@ -52,7 +52,14 @@ const TelaCadastro = (props) => {
                     nome={usuario.item.nome}
                     telefone={usuario.item.telefone}
                     onSelect={
-                        () => {props.navigation.navigate("DetalheDoUsuario", {nome: usuario.item.nome, telefone: usuario.item.telefone, imagem: usuario.item.imagemURI})}
+                        () => {props.navigation.navigate("DetalheDoUsuario", 
+                                                {
+                                                    nome: usuario.item.nome, 
+                                                    telefone: usuario.item.telefone, 
+                                                    imagem: usuario.item.imagemURI,
+                                                    latitude: usuario.item.latitude,
+                                                    longitude: usuario.item.longitude
+                                                })}
                     }
                     imagem={null}
                     // onDelete={removerLembrete}

@@ -3,6 +3,7 @@ import {View, TextInput, Button, StyleSheet} from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as usuariosActions from '../store/usuarios-actions'
 import TiraFoto from './TiraFoto';
+import CapturarLocalizacao from './CapturarLocalizacao';
 
 const LembreteInput = (props) => {
 
@@ -13,6 +14,10 @@ const LembreteInput = (props) => {
     const [telefone, setTelefone] = useState('');
 
     const [imagemURI, setImagemURI] = useState();
+
+    const [latitude, setLatitude] = useState("");
+
+    const [longitude, setLongitude] = useState("");
 
 
     const capturarNome = (nome) => {
@@ -27,9 +32,14 @@ const LembreteInput = (props) => {
       setImagemURI(imagemURI);
     }
 
+    const capturaLatLng = (latitude, longitude) => { 
+      setLatitude(latitude);
+      setLongitude(longitude);
+    }
+
     const adicionarUsuarioInput = () => {
-      console.log("Nome: " + nome + "\nTelefone: " + telefone);
-      dispatch(usuariosActions.addUsuario(nome, telefone, imagemURI));
+      console.log("Nome: " + nome + " " + "\nTelefone: " + telefone + "\nLat " + latitude + "\nLongitude: " + longitude);
+      dispatch(usuariosActions.addUsuario(nome,telefone, imagemURI, latitude, longitude));
     }
 
     return (
@@ -47,8 +57,9 @@ const LembreteInput = (props) => {
       value={telefone}
     />
     <TiraFoto onFotoTirada={fotoTirada} />
+    <CapturarLocalizacao onCapturaLatLng={capturaLatLng}/>
     <Button 
-      title="+"
+      title="Salvar usuario"
       onPress={adicionarUsuarioInput}
       // onPress={() => {props.onAdicionarUsuario(nome, telefone)}}
     />
@@ -58,10 +69,9 @@ const LembreteInput = (props) => {
 
 const styles = StyleSheet.create({
     tela:{
-      flexDirection: 'row',
+      flexDirection: 'column',
       marginBottom: 6,
       justifyContent: 'space-between',
-      alignItems: 'center'
     },
     form: { 
       padding: 2,

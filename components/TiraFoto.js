@@ -45,10 +45,10 @@ const estilos = StyleSheet.create({
     },
     previewDaImagem: {
         width: '100%',
-        height: 200,
+        height: 150,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 5,
         borderColor: '#CCC',
         borderWidth: 1
     },

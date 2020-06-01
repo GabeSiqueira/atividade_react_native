@@ -29,7 +29,8 @@ const TelaUsuario = (props) => {
         props.onEditarTelaInicio();
     }
     
-    console.log("URI : " + props.navigation.state.params.imagem)
+    // console.log("URI : " + props.navigation.state.params.imagem)
+    console.log(props.navigation.state.params.latitude.latitude)
 
     return (
         <View styles={estilos.telaView}>
@@ -38,6 +39,8 @@ const TelaUsuario = (props) => {
                     {/* <Text style={estilos.txtForm}>ID: {props.navigation.state.params.chave}</Text> */}
                     <Text style={estilos.txtForm}>Nome: {props.navigation.state.params.nome}</Text>
                     <Text style={estilos.txtForm}>Telefone: {props.navigation.state.params.telefone}</Text>
+                    <Text style={estilos.txtForm}>Latitude: {props.navigation.state.params.latitude.latitude}</Text>
+                    <Text style={estilos.txtForm}>Longitude: {props.navigation.state.params.latitude.longitude}</Text>
                     <Image 
                         style={estilos.imagem}
                         source={{uri : props.navigation.state.params.imagem}}
@@ -102,8 +105,8 @@ const estilos = StyleSheet.create({
         margin: 10,
     },
     imagem: {
-        width: '50%',
-        height: '100%'
+        width: '100%',
+        height: '70%'
     }
 });
 
